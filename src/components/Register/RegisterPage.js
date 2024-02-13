@@ -138,11 +138,13 @@
 
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
 import RecruiterLoginForm from "./RecruiterLoginForm";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 const RegisterPage = () => {
+  const success = useNavigate();
   const initialState = {
     isCandidate: true,
     name: "",
@@ -198,8 +200,8 @@ const RegisterPage = () => {
         message: "File size exceeds the maximum limit (1MB).",
       });
     } else {
-      clearErrors("resume");
-      setValue("resume", file);
+      clearErrors("file");
+      setValue("file", file);
     }
   };
 
@@ -234,6 +236,7 @@ const RegisterPage = () => {
       console.log(data);
       // Assuming your API returns some data
       reset();
+      success("/loginUser");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -468,7 +471,6 @@ const RegisterPage = () => {
                             onChange={handleFileUpload}
                             {...register("resume", {
                               required: "Resume file is required",
-                              // Add additional validation rules if needed
                             })}
                           />
 
@@ -630,6 +632,14 @@ const RegisterPage = () => {
                     Submit
                   </Button>
                 </Col>
+                <div className="container d-flex justify-content-center p-2">
+                  <span>
+                    Already Registered?
+                    <Link to="/loginUser" style={{ textDecoration: "none" }}>
+                      Click here.
+                    </Link>
+                  </span>
+                </div>
               </Row>
             </Form>
           </div>
