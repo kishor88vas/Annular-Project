@@ -106,7 +106,7 @@ const LoginPage = () => {
           className="register-link"
           style={{ textDecoration: "none", marginTop: "20px" }}
         >
-          {/* New to Annular? <Link to="/registerUser">Register</Link> */}
+          New to Annular? <Link to="/registerUser">Register</Link>
         </div>
       </div>
     </Container>
