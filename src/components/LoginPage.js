@@ -18,8 +18,10 @@ const LoginPage = () => {
   const onSubmit = async (data, event) => {
     event.preventDefault();
     try {
-      // Make POST request to API endpoint
-      const response = await axios.post("/api/login", data);
+      const response = await axios.post(
+        "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/login",
+        data
+      );
       console.log("Login successful:", response.data);
       // Handle successful login (redirect user, set state, etc.)
     } catch (error) {
@@ -27,7 +29,6 @@ const LoginPage = () => {
         setBackendError("Password does not match.");
       } else {
         console.error("Login error:", error.response.data);
-        // Handle other errors
       }
     }
     console.log(data);
@@ -50,12 +51,12 @@ const LoginPage = () => {
         <h2>Sign in to your account</h2>
         <form onSubmit={handleSubmit(onSubmit)} method="post">
           <div className="input-container">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="userName">Email</label>
             <input
               type="email"
-              id="email"
-              name="email"
-              {...register("email", {
+              id="userName"
+              name="userName"
+              {...register("userName", {
                 required: "Email id is required.",
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
@@ -64,9 +65,9 @@ const LoginPage = () => {
               })}
             />
             {/* /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i */}
-            {errors && errors.email && (
+            {errors && errors.userName && (
               <p className="error-message text-danger mb-2">
-                {errors.email.message}
+                {errors.userName.message}
               </p>
             )}
           </div>

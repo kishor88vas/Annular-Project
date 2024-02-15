@@ -186,14 +186,14 @@ const RegisterPage = () => {
     setFormData({ ...formData, [name]: !formData[name] });
   };
 
-  const maxSizeInBytes = 1024 * 1024; // 1MB
+  //const maxSizeInBytes = 1024 * 1024; // 1MB
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
 
     clearErrors("resume");
     // File size validation
-    if (file && file.size > maxSizeInBytes) {
+    if (file && file.size > 1024 * 1024) {
       setValue("resume", null);
       setError("resume", {
         type: "manual",
