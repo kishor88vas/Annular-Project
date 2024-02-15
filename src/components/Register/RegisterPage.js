@@ -1,141 +1,3 @@
-// import React, { useState } from "react";
-// import { Form, Col, Row } from "react-bootstrap";
-// import RecruiterLoginForm from "./RecruiterLoginForm";
-// import CandidateForm from "./CandidateForm";
-
-// // Functions for check box,add Button and
-// const useForm1 = (initialState) => {
-//   const [formData, setFormData] = useState(initialState);
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleCheckboxChange = (e) => {
-//     const { name } = e.target;
-//     setFormData({ ...formData, [name]: !formData[name] });
-//   };
-
-//   const handleAddCollege = () => {
-//     setFormData({
-//       ...formData,
-//       education: [
-//         ...formData.education,
-//         { college: "", course: "", yearOfPassing: "" },
-//       ],
-//     });
-//   };
-
-//   const handleDeleteCollege = (index) => {
-//     const updatedEducation = [...formData.education];
-//     updatedEducation.splice(index, 1); // Remove the college at the specified index
-//     setFormData({ ...formData, education: updatedEducation });
-//   };
-
-//   const handleCollegeInputChange = (e, index) => {
-//     const { name, value } = e.target;
-//     const updatedEducation = [...formData.education];
-//     updatedEducation[index][name] = value;
-//     setFormData({ ...formData, education: updatedEducation });
-//   };
-
-//   return {
-//     formData,
-//     handleInputChange,
-//     handleCheckboxChange,
-//     handleAddCollege,
-//     handleDeleteCollege,
-//     handleCollegeInputChange,
-//   };
-// };
-
-// const RegisterPage = () => {
-//   const initialState = {
-//     isCandidate: true,
-//     name: "",
-//     location: "",
-//     sponsorshipRequired: false,
-//     phoneNumber: "",
-//     summary: "",
-//     education: [{ college: "", course: "", yearOfPassing: "" }],
-//     skillset: "",
-//     tools: "",
-//     certification: "",
-//     volunteering: "",
-//   };
-
-//   const {
-//     formData,
-//     handleInputChange,
-//     handleCheckboxChange,
-//     handleAddCollege,
-//     handleDeleteCollege,
-//     handleCollegeInputChange,
-//   } = useForm1(initialState);
-
-//   const handleSubmit = (e) => {
-//     //e.preventDefault();
-//     console.log(e);
-//     console.log(formData);
-//   };
-
-//   return (
-//     <div
-//       className="container p-4 m-0"
-//       style={{
-//         background: "linear-gradient(45deg, #fff1eb  30%,#ace0f9  90%)",
-//         minWidth: "100%",
-//         minHeight: "100vh",
-//       }}
-//     >
-//       <Row className="justify-content-center">
-//         <Col md={6}>
-//           <div className="shadow p-4 rounded">
-//             <Form onSubmit={handleSubmit}>
-//               <Form.Group controlId="formRole">
-//                 <Form.Label>Are you a candidate or recruiter?</Form.Label>
-//                 <div>
-//                   <Form.Check
-//                     label="Candidate"
-//                     type="radio"
-//                     name="isCandidate"
-//                     checked={formData.isCandidate}
-//                     onChange={handleCheckboxChange}
-//                   />
-//                   <Form.Check
-//                     label="Recruiter"
-//                     type="radio"
-//                     name="isCandidate"
-//                     checked={!formData.isCandidate}
-//                     onChange={handleCheckboxChange}
-//                   />
-//                 </div>
-//               </Form.Group>
-
-//               {formData.isCandidate ? (
-//                 <CandidateForm
-//                   formData={formData}
-//                   handleInputChange={handleInputChange}
-//                   handleCheckboxChange={handleCheckboxChange}
-//                   handleAddCollege={handleAddCollege}
-//                   handleDeleteCollege={handleDeleteCollege}
-//                   handleCollegeInputChange={handleCollegeInputChange}
-//                   handleSubmit={handleSubmit}
-//                 />
-//               ) : (
-//                 <RecruiterLoginForm />
-//               )}
-//             </Form>
-//           </div>
-//         </Col>
-//       </Row>
-//     </div>
-//   );
-// };
-
-// export default RegisterPage;
-
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
@@ -186,14 +48,14 @@ const RegisterPage = () => {
     setFormData({ ...formData, [name]: !formData[name] });
   };
 
-  //const maxSizeInBytes = 1024 * 1024; // 1MB
+  const maxSizeInBytes = 1024 * 1024; // 1MB
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
 
     clearErrors("resume");
     // File size validation
-    if (file && file.size > 1024 * 1024) {
+    if (file && file.size > maxSizeInBytes) {
       setValue("resume", null);
       setError("resume", {
         type: "manual",
@@ -234,7 +96,7 @@ const RegisterPage = () => {
       const response = await axios.post("http://localhost:3000/", data);
       console.log(response.data);
       console.log(data);
-      // Assuming your API returns some data
+
       reset();
       success("/loginUser");
     } catch (error) {

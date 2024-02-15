@@ -23,7 +23,6 @@ const LoginPage = () => {
         data
       );
       console.log("Login successful:", response.data);
-      // Handle successful login (redirect user, set state, etc.)
     } catch (error) {
       if (error.response.status === 401) {
         setBackendError("Password does not match.");
