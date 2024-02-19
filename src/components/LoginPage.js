@@ -17,6 +17,7 @@ const LoginPage = () => {
 
   const onSubmit = async (data, event) => {
     event.preventDefault();
+    console.log(data);
     try {
       const response = await axios.post(
         "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/logins",
@@ -24,11 +25,12 @@ const LoginPage = () => {
       );
       console.log("Login successful:", response.data);
     } catch (error) {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         setBackendError("Password does not match.");
       } else {
         console.error("Login error:", error.response.data);
       }
+      //console.error("Error Submitting Form:", error);
     }
     console.log(data);
     console.log(event);

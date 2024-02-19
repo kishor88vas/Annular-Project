@@ -12,15 +12,15 @@ const RegisterPage = () => {
     name: "",
     place: "",
     sponership: false,
-    phoneNumber: "",
-    email: "",
+    mobileNumber: "",
+    emailId: "",
     password: "",
     confirmPassword: "",
     summary: "",
     resume: null,
-    education: [{ college: "", course: "", yearOfPassing: "" }],
-    skillset: "",
-    tools: "",
+    educations: [{ college: "", course: "", yearOfPassing: "" }],
+    skillSet: "",
+    tool: "",
     certification: "",
     volunteering: "",
   };
@@ -70,8 +70,8 @@ const RegisterPage = () => {
   const handleAddCollege = () => {
     setFormData({
       ...formData,
-      education: [
-        ...formData.education,
+      educations: [
+        ...formData.educations,
         { college: "", course: "", yearOfPassing: "" },
       ],
     });
@@ -95,12 +95,7 @@ const RegisterPage = () => {
     try {
       const response = await axios.post(
         "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/register",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        data
       );
       console.log(response.data);
       console.log(data);
@@ -202,8 +197,8 @@ const RegisterPage = () => {
                         <Form.Control
                           type="text"
                           placeholder="Mobile Number"
-                          name="phoneNumber"
-                          id="phoneNumber"
+                          name="mobileNumber"
+                          id="mobileNumber"
                           maxLength={10}
                           minLength={10}
                           onChange={handleInputChange}
@@ -213,7 +208,7 @@ const RegisterPage = () => {
                               e.preventDefault();
                             }
                           }}
-                          {...register("phoneNumber", {
+                          {...register("mobileNumber", {
                             required: "Mobile Number is required.",
                             minLength: {
                               value: 10,
@@ -225,9 +220,9 @@ const RegisterPage = () => {
                             },
                           })}
                         />
-                        {errors && errors.phoneNumber && (
+                        {errors && errors.mobileNumber && (
                           <p className="error-message text-danger">
-                            {errors.phoneNumber.message}
+                            {errors.mobileNumber.message}
                           </p>
                         )}
                       </Form.Group>
@@ -237,9 +232,9 @@ const RegisterPage = () => {
                         <Form.Control
                           type="email"
                           placeholder="Email"
-                          name="email"
-                          id="email"
-                          {...register("email", {
+                          name="emailId"
+                          id="emailId"
+                          {...register("emailId", {
                             required: "Email is required.",
                             pattern: {
                               value:
@@ -248,9 +243,9 @@ const RegisterPage = () => {
                             },
                           })}
                         />
-                        {errors && errors.email && (
+                        {errors && errors.emailId && (
                           <p className="error-message text-danger">
-                            {errors.email.message}
+                            {errors.emailId.message}
                           </p>
                         )}
                       </Form.Group>
@@ -350,24 +345,24 @@ const RegisterPage = () => {
                             </p>
                           )}
                         </Form.Group>
-                        {formData.education.map((edu, index) => (
+                        {formData.educations.map((edu, index) => (
                           <div key={index}>
                             <Form.Label className="mt-3">College:</Form.Label>
                             <Form.Control
                               type="text"
                               placeholder="College"
-                              name={`education[${index}].college`}
+                              name={`educations[${index}].college`}
                               defaultValue={edu.college}
-                              {...register(`education[${index}].college`, {
+                              {...register(`educations[${index}].college`, {
                                 required: "College is required",
                               })}
                             />
                             {errors &&
-                              errors.education &&
-                              errors.education[index] && (
+                              errors.educations &&
+                              errors.educations[index] && (
                                 <p className="error-message text-danger">
-                                  {errors.education[index].college &&
-                                    errors.education[index].college.message}
+                                  {errors.educations[index].college &&
+                                    errors.educations[index].college.message}
                                 </p>
                               )}
 
@@ -375,18 +370,18 @@ const RegisterPage = () => {
                             <Form.Control
                               type="text"
                               placeholder="Course"
-                              name={`education[${index}].course`}
+                              name={`educations[${index}].course`}
                               defaultValue={edu.course}
-                              {...register(`education[${index}].course`, {
+                              {...register(`educations[${index}].course`, {
                                 required: "Course is required",
                               })}
                             />
                             {errors &&
-                              errors.education &&
-                              errors.education[index] && (
+                              errors.educations &&
+                              errors.educations[index] && (
                                 <p className="error-message text-danger">
-                                  {errors.education[index].course &&
-                                    errors.education[index].course.message}
+                                  {errors.educations[index].course &&
+                                    errors.educations[index].course.message}
                                 </p>
                               )}
 
@@ -396,7 +391,7 @@ const RegisterPage = () => {
                             <Form.Control
                               type="text"
                               placeholder="Year of passing"
-                              name={`education[${index}].yearOfPassing`}
+                              name={`educations[${index}].yearOfPassing`}
                               defaultValue={edu.yearOfPassing}
                               maxLength={4}
                               onKeyPress={(e) => {
@@ -406,7 +401,7 @@ const RegisterPage = () => {
                                 }
                               }}
                               {...register(
-                                `education[${index}].yearOfPassing`,
+                                `educations[${index}].yearOfPassing`,
                                 {
                                   required: "Year of passing is required",
                                   maxLength: {
@@ -418,11 +413,11 @@ const RegisterPage = () => {
                               )}
                             />
                             {errors &&
-                              errors.education &&
-                              errors.education[index] && (
+                              errors.educations &&
+                              errors.educations[index] && (
                                 <p className="error-message text-danger">
-                                  {errors.education[index].yearOfPassing &&
-                                    errors.education[index].yearOfPassing
+                                  {errors.educations[index].yearOfPassing &&
+                                    errors.educations[index].yearOfPassing
                                       .message}
                                 </p>
                               )}
@@ -442,11 +437,11 @@ const RegisterPage = () => {
                         <Form.Control
                           type="text"
                           placeholder="Keywords for search"
-                          name="skillset"
-                          id="skillset"
+                          name="skillSet"
+                          id="skillSet"
                           className="mt-2"
                           onChange={handleInputChange}
-                          {...register("skillset")}
+                          {...register("skillSet")}
                         />
                       </Form.Group>
 
@@ -455,10 +450,10 @@ const RegisterPage = () => {
                         <Form.Control
                           type="text"
                           placeholder="Tools"
-                          name="tools"
-                          id="tools"
+                          name="tool"
+                          id="tool"
                           onChange={handleInputChange}
-                          {...register("tools")}
+                          {...register("tool")}
                         />
                       </Form.Group>
 
