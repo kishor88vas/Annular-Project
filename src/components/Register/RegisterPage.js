@@ -10,8 +10,8 @@ const RegisterPage = () => {
   const initialState = {
     isCandidate: true,
     name: "",
-    location: "",
-    sponsorshipRequired: false,
+    place: "",
+    sponership: false,
     phoneNumber: "",
     email: "",
     password: "",
@@ -176,26 +176,26 @@ const RegisterPage = () => {
                         <Form.Control
                           type="text"
                           placeholder="Location"
-                          name="location"
-                          id="location"
+                          name="place"
+                          id="place"
                           onChange={handleInputChange}
-                          {...register("location", {
+                          {...register("place", {
                             required: "Location is required.",
                           })}
                         />
-                        {errors && errors.location && (
+                        {errors && errors.place && (
                           <p className="error-message text-danger">
-                            {errors.location.message}
+                            {errors.place.message}
                           </p>
                         )}
 
-                        <Form.Group controlId="sponsorshipRequired">
+                        <Form.Group controlId="sponership">
                           <Form.Check
                             label="Sponsorship"
                             type="checkbox"
-                            name="sponsorshipRequired"
-                            id="sponsorshipRequired"
-                            {...register("sponsorshipRequired")}
+                            name="sponership"
+                            id="sponership"
+                            {...register("sponership")}
                           />
                         </Form.Group>
                         <Form.Label className="mt-3">Mobile Number:</Form.Label>

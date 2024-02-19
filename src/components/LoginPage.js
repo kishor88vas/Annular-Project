@@ -19,7 +19,7 @@ const LoginPage = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/login",
+        "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/logins",
         data
       );
       console.log("Login successful:", response.data);
