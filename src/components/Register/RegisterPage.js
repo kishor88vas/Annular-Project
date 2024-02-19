@@ -93,7 +93,15 @@ const RegisterPage = () => {
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      const response = await axios.post("http://localhost:3000/", data);
+      const response = await axios.post(
+        "http://13.233.141.139:8080/LoginProject-0.0.1-SNAPSHOT/user/register",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       console.log(response.data);
       console.log(data);
 
